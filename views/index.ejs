@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Email Service</title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+	</head>
+	<body>
+		<h1>Email Service</h1>
+		<p>
+			<form action="/send-mail" method="post">
+      			<div>
+          			from: 	<input id="from-address" type="text" name="fromMailAddress" placeholder="from address" size="30" maxlength="50"><br/>
+          			to: 	<input id="to-address" type="text" name="toMailAddress" placeholder="to address" size="30" maxlength="50"><br/>
+          			subject: <input id="subject" type="text" name="subject" placeholder="subject" size="30" maxlength="50"><br/>
+          		</div>
+          		<div id="content">
+          			content: <textarea id="content" name="emailContent" cols="50" rows="10"></textarea><br/>
+          		</div>
+          		<input type="submit" value="send" class="btn">
+      		</form>
+		</p>
+	</body>
+</html>
