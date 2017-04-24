@@ -28,7 +28,7 @@ For more information about the npm module, please refer to [npm packge](https://
 
 
 ### Trade-offs
-- To keep the web application simple, I put a nested if statment in the main function in the npm module, which will first check if SendGrid service is up and send mail via SendGrid. If SendGrid went down, it will then check if Mailgun service is up and send mail via Mailgun. If both mail service went down, an error message will returned. It could be better to handle the condition check on server side with the web service.
+- To keep the web application simple, I have a nested promises (3 levels) in the main function in the npm module, which will first check if SendGrid service is up and send mail via SendGrid. If SendGrid went down, it will then check if Mailgun service is up and send mail via Mailgun. If both mail service went down, an error message will returned. It could be better to handle the condition check on server side with the web service.
 
 - For simplicity, only a simple json format variable is accepted as the mail body.
 ```javascript
@@ -36,7 +36,7 @@ mailbody = {
 	fromMailAddress: 'Sender Email address',
 	toMailAddress: 'Receiver Email address',
 	subject: 'subject',
-	content: 'mail cntent'
+	emailContent: 'mail cntent'
 }
 ```
 
