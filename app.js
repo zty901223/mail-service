@@ -4,21 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var index = require('./routes/index');
 var users = require('./routes/users');
-
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var assert = require('assert');
-var sendMailKZ = require('send-mail-kz');
-var sg_api_key = 'SendGrid api key';
-var mg_api_key = 'mailgun api key';
-var mg_domain ='mailgun domain';
+var sendMailKz = require('send-mail-kz');
+var sgApiKey = 'sendgrid api key';
+var mgApiKey = 'mailgun api key';
+var mgDomain ='mailgun domain';
 
 var app = express();
 
@@ -38,17 +29,18 @@ app.use('/', index);
 app.use('/users', users);
 
 app.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index');
 });
 
 app.post('/send-mail', function(req,res) {
-	sendMailKZ.sendMail(req.body, sg_api_key, mg_api_key, mg_domain, function(err, status){
-		if(err) {
-			res.send(err + '*****' + status);
-		}else {
-			res.send(status);
-		}
-	});
+	console.log(req.body);
+	sendMailKz.send_mail(req.body, sgApiKey, mgApiKey, mgDomain)
+		.then(status => {
+			res.send('Mail sent successful.' + status);
+		})
+		.catch(status => {
+			res.send('failed to send mail. Error:' + status);
+		})
 });
 
 module.exports = app;
